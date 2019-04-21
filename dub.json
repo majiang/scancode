@@ -1,0 +1,8 @@
+{
+    "name": "scancode",
+    "authors": [
+        "Ryuichi OHORI (@majiang)"
+    ],
+    "description": "Keyboard scancodes",
+    "license": "Unlicense"
+}

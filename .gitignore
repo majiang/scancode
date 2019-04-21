@@ -1,0 +1,14 @@
+.dub
+docs.json
+__dummy.html
+docs/
+scancode.so
+scancode.dylib
+scancode.dll
+scancode.a
+scancode.lib
+scancode-test-*
+*.exe
+*.o
+*.obj
+*.lst
