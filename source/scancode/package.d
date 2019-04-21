@@ -89,8 +89,53 @@ static this ()
         jpKeyboard[alphabet.to!LetterKeys] = cast(char)(alphabet.toUpper);
     }
 }
-Scancode[LetterKeys] usScancodes, jpScancodes;
+Scancode[LetterKeys] usScancodes, jpScancodes, commonScancodes;
 static this ()
+{
+    with (LetterKeys) commonScancodes = [
+            hyphen: Scancode.hyphen,
+            semicolon: Scancode.semicolon,
+            comma: Scancode.comma,
+            period: Scancode.period,
+            slash: Scancode.slash,
+    ];
+    foreach (char digit; '0'..'9'+1)
+        commonScancodes[['n', digit].to!LetterKeys] = ['n', digit].to!Scancode;
+    foreach (char digit; 'a'..'z'+1)
+        commonScancodes[[digit].to!LetterKeys] = [digit].to!Scancode;
+    /*
+    _unusedUS1 = 0x0,
+    backslashJP = 0x73,
+    */
+
+    with (LetterKeys) jpScancodes = [
+            // undefined: Scancode.zenhanJP,
+            caretJP: Scancode.caretJP,
+            yenJP: Scancode.yenJP,
+            openBrac: Scancode.openBracJP,
+            closeBrac: Scancode.closeBracJP,
+            atJP: Scancode.atJP,
+            colonJP: Scancode.colonJP,
+            backslash: Scancode.backslashJP,
+    ];
+    with (LetterKeys) usScancodes = [
+            graveUS: Scancode.graveUS,
+            equalUS: Scancode.equalUS,
+            // undefined: _unusedUS0,
+            openBrac: Scancode.openBracUS,
+            closeBrac: Scancode.closeBracUS,
+            quoteUS: Scancode.quoteUS,
+            backslash: Scancode.backslashUS,
+            // undefined: _unusedUS1,
+    ];
+    foreach (kvp; commonScancodes.byKeyValue)
+    {
+        jpScancodes[kvp.key] = kvp.value;
+        usScancodes[kvp.key] = kvp.value;
+    }
+}
+///
+unittest
 {
 }
 
