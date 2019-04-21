@@ -10,6 +10,38 @@ version (unittest)
     import std.format;
     import std.stdio : stderr;
 }
+enum Scancode : ushort
+{
+    graveUS = 0x29,
+    zenhanJP = 0x29,
+    n1 = 0x2, n2, n3, n4, n5, n6, n7, n8, n9, n0,
+    hyphen,
+    equalUS = 0xd,
+    caretJP = 0xd,
+    _unusedUS0 = 0x0,
+    yenJP = 0x7d,
+    q = 0x10, w, e, r, t, y, u, i, o, p,
+    openBracUS = 0x1a, closeBracUS,
+    atJP = 0x1a, openBracJP,
+    capsLock = 0x3a,
+    a = 0x1e, s, d, f, g, h, j, k, l,
+    semicolon = 0x27,
+    quoteUS = 0x28,
+    colonJP = 0x28,
+    backslashUS = 0x2b,
+    closeBracJP = 0x2b,
+    z = 0x2c, x, c, v, b, n, m, comma, period, slash,
+    _unusedUS1 = 0x0,
+    backslashJP = 0x73,
+
+    leftShift = 0x2a, rightShift = 0x36,
+    control = 0x1d,
+    alt = 0x38,
+
+    muhenkan = 0x7b,
+    henkan = 0x79,
+    kanakana = 0x70,
+}
 
 enum LetterKeys
 {
@@ -57,6 +89,10 @@ static this ()
         jpKeyboard[alphabet.to!LetterKeys] = cast(char)(alphabet.toUpper);
     }
 }
+Scancode[LetterKeys] usScancodes, jpScancodes;
+static this ()
+{
+}
 
 ///
 enum
@@ -100,6 +136,7 @@ unittest
         ].adjacent)
         assert (pair[0].equal!isSameLength(pair[1]));
 }
+///
 unittest
 {
     // same language: same set of letters input without shift
